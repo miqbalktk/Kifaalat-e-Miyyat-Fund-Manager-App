@@ -17,15 +17,38 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Check Files
+      - name: Show what files exist
         run: |
+          echo "=== ROOT FILES ==="
           ls -la
-          ls -la www || echo "www folder missing!"
+          echo "=== WWW CHECK ==="
+          ls -la www || echo "ERROR: www folder NAHI HAI"
+          echo "=== PACKAGE CHECK ==="
+          cat package.json || echo "ERROR: package.json NAHI HAI"
 
-      - name: Build APK with Capacitor
+      - name: Auto-Fix Missing Files
         run: |
-          npm install
-          npx cap add android || echo "android already exists"
+          # Agar package.json nahi hai to bana do
+          if [ ! -f package.json ]; then
+            echo '{"name":"kifaalat-fund","version":"1.0.0","dependencies":{"@capacitor/core":"^6.0.0","@capacitor/cli":"^6.0.0","@capacitor/android":"^6.0.0"}}' > package.json
+            echo "package.json bana diya"
+          fi
+          # Agar capacitor config nahi hai to bana do
+          if [ ! -f capacitor.config.ts ]; then
+            echo "import type { CapacitorConfig } from '@capacitor/cli'; const config: CapacitorConfig = { appId: 'com.kifaalat.fund', appName: 'Kifaalat-e-Miyyat Fund', webDir: 'www' }; export default config;" > capacitor.config.ts
+            echo "capacitor.config.ts bana diya"
+          fi
+          # Agar www nahi hai, to root wali html ko www me daal do
+          if [ ! -d www ]; then
+            mkdir -p www
+            cp *.html www/ 2>/dev/null || echo "koi html file hi nahi mili root me!"
+            ls -la www
+          fi
+
+      - name: Build APK
+        run: |
+          npm install --legacy-peer-deps
+          npx cap add android || true
           npx cap sync android
           cd android && chmod +x gradlew && ./gradlew assembleDebug
 
