@@ -14,32 +14,29 @@ jobs:
 
       - name: Create Pure Android Project
         run: |
-          # Purana kachra saaf karo
           rm -rf android node_modules package-lock.json capacitor.config.ts capacitor.config.js
           
-          # www folder check karo
           if [ ! -d www ]; then
             mkdir -p www
             cp *.html www/ 2>/dev/null || echo "html nahi mili"
           fi
           ls -la www
           
-          # Android folders banao
           mkdir -p android/app/src/main/assets
           mkdir -p android/app/src/main/java/com/kifaalat/fund
           cp -r www android/app/src/main/assets/www
           
-          # 1. settings.gradle - BILKUL SIMPLE
+          # 1. settings.gradle - SIMPLE
           cat > android/settings.gradle << 'EOF'
           rootProject.name = "KifaalatFund"
           include ':app'
           EOF
           
-          # 2. root build.gradle
+          # 2. root build.gradle - YAHAN FIX HAI
           cat > android/build.gradle << 'EOF'
           buildscript {
             repositories { google(); mavenCentral() }
-            dependencies { classpath 'com.android.application:8.5.2' }
+            dependencies { classpath 'com.android.tools.build:gradle:8.5.2' }
           }
           allprojects { repositories { google(); mavenCentral() } }
           EOF
@@ -74,7 +71,7 @@ jobs:
           </manifest>
           EOF
           
-          # 5. MainActivity.java - Yehi aapka App hai
+          # 5. MainActivity.java
           cat > android/app/src/main/java/com/kifaalat/fund/MainActivity.java << 'EOF'
           package com.kifaalat.fund;
           import android.os.Bundle;
