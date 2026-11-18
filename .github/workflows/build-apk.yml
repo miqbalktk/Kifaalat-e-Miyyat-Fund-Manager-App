@@ -12,38 +12,39 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Create Pure Android Project (No Capacitor, No Node)
+      - name: Create Pure Android Project
         run: |
-          # Purana Capacitor wala kachra delete karo
+          # Purana kachra saaf karo
           rm -rf android node_modules package-lock.json capacitor.config.ts capacitor.config.js
           
-          # www folder check karo - agar www nahi hai to root wali html lo
+          # www folder check karo
           if [ ! -d www ]; then
             mkdir -p www
             cp *.html www/ 2>/dev/null || echo "html nahi mili"
           fi
           ls -la www
           
-          # Android project structure banao
+          # Android folders banao
           mkdir -p android/app/src/main/assets
           mkdir -p android/app/src/main/java/com/kifaalat/fund
           cp -r www android/app/src/main/assets/www
           
-          # settings.gradle
+          # 1. settings.gradle - BILKUL SIMPLE
           cat > android/settings.gradle << 'EOF'
-          pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
-          dependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS) repositories { google(); mavenCentral() } }
-          rootProject.name = "Kifaalat-e-Miyyat Fund"
+          rootProject.name = "KifaalatFund"
           include ':app'
           EOF
           
-          # root build.gradle
+          # 2. root build.gradle
           cat > android/build.gradle << 'EOF'
-          buildscript { dependencies { classpath 'com.android.application:8.5.2' } }
+          buildscript {
+            repositories { google(); mavenCentral() }
+            dependencies { classpath 'com.android.application:8.5.2' }
+          }
           allprojects { repositories { google(); mavenCentral() } }
           EOF
           
-          # app build.gradle
+          # 3. app build.gradle
           cat > android/app/build.gradle << 'EOF'
           apply plugin: 'com.android.application'
           android {
@@ -62,7 +63,7 @@ jobs:
           dependencies { implementation 'androidx.appcompat:appcompat:1.6.1' }
           EOF
           
-          # AndroidManifest.xml
+          # 4. AndroidManifest.xml
           cat > android/app/src/main/AndroidManifest.xml << 'EOF'
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:label="Kifaalat-e-Miyyat Fund" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:allowBackup="true">
@@ -73,7 +74,7 @@ jobs:
           </manifest>
           EOF
           
-          # MainActivity.java - Yehi aapka app hai
+          # 5. MainActivity.java - Yehi aapka App hai
           cat > android/app/src/main/java/com/kifaalat/fund/MainActivity.java << 'EOF'
           package com.kifaalat.fund;
           import android.os.Bundle;
