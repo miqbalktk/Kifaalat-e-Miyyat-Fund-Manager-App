@@ -32,7 +32,14 @@ jobs:
           include ':app'
           EOF
           
-          # 2. root build.gradle - YAHAN FIX HAI
+          # 2. gradle.properties - YEHI NAYA FIX HAI
+          cat > android/gradle.properties << 'EOF'
+          org.gradle.jvmargs=-Xmx2048m
+          android.useAndroidX=true
+          android.enableJetifier=true
+          EOF
+          
+          # 3. root build.gradle
           cat > android/build.gradle << 'EOF'
           buildscript {
             repositories { google(); mavenCentral() }
@@ -41,7 +48,7 @@ jobs:
           allprojects { repositories { google(); mavenCentral() } }
           EOF
           
-          # 3. app build.gradle
+          # 4. app build.gradle
           cat > android/app/build.gradle << 'EOF'
           apply plugin: 'com.android.application'
           android {
@@ -60,7 +67,7 @@ jobs:
           dependencies { implementation 'androidx.appcompat:appcompat:1.6.1' }
           EOF
           
-          # 4. AndroidManifest.xml
+          # 5. AndroidManifest.xml
           cat > android/app/src/main/AndroidManifest.xml << 'EOF'
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:label="Kifaalat-e-Miyyat Fund" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:allowBackup="true">
@@ -71,7 +78,7 @@ jobs:
           </manifest>
           EOF
           
-          # 5. MainActivity.java
+          # 6. MainActivity.java
           cat > android/app/src/main/java/com/kifaalat/fund/MainActivity.java << 'EOF'
           package com.kifaalat.fund;
           import android.os.Bundle;
