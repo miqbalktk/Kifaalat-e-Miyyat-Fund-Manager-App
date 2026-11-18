@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#004d30" />
+      <stop offset="50%" stop-color="#023d26" />
+      <stop offset="100%" stop-color="#002416" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#004d30" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#bgGrad)" />
+  <circle cx="256" cy="256" r="220" fill="url(#glow)" />
+  
+  <!-- Outer Gold Ring -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="url(#goldGrad)" stroke-width="8" stroke-dasharray="16 8" opacity="0.8" />
+  <circle cx="256" cy="256" r="195" fill="none" stroke="#34d399" stroke-width="3" opacity="0.5" />
+
+  <!-- Islamic Dome Arch Silhouettes -->
+  <path d="M 176 340 L 176 250 C 176 190, 256 140, 256 140 C 256 140, 336 190, 336 250 L 336 340 Z" fill="none" stroke="url(#goldGrad)" stroke-width="12" stroke-linejoin="round" />
+  
+  <!-- Crescent & Star inside Arch -->
+  <path d="M 270 200 C 240 200, 215 225, 215 255 C 215 285, 240 310, 270 310 C 285 310, 298 304, 308 294 C 280 292, 260 270, 260 255 C 260 240, 280 218, 308 216 C 298 206, 285 200, 270 200 Z" fill="url(#goldGrad)" />
+  <polygon points="285,240 290,248 298,248 292,253 294,261 285,256 276,261 278,253 272,248 280,248" fill="#fef08a" />
+
+  <!-- Hands / Support Foundation Base -->
+  <path d="M 140 360 C 180 340, 220 345, 256 360 C 292 345, 332 340, 372 360 L 372 380 C 332 360, 292 365, 256 380 C 220 365, 180 360, 140 380 Z" fill="url(#goldGrad)" />
+  
+  <!-- Subtle Urdu Inscription Text: KMF -->
+  <text x="256" y="420" font-family="sans-serif" font-weight="900" font-size="34" fill="#a7f3d0" text-anchor="middle" letter-spacing="4">KMF</text>
+  <text x="256" y="448" font-family="sans-serif" font-weight="bold" font-size="16" fill="#fef08a" text-anchor="middle" letter-spacing="2">KIFAALAT E MIYYAT</text>
+</svg>

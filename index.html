@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kifaalat e Miyyat Fund</title>
+    <meta name="description" content="Community Bereavement & Mutual Funeral Assistance Charity Fund with monthly contribution tracking, automated notifications, transparent reports, secure donations, and Urdu localization." />
+    <meta name="theme-color" content="#004d30" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="KMF Fund" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:title" content="Kifaalat e Miyyat Fund" />
+    <meta property="og:description" content="Community Bereavement & Mutual Funeral Assistance Charity Fund with monthly contribution tracking, automated notifications, transparent reports, secure donations, and Urdu localization." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      /* Safe Storage & Exception Fallback (Prevents blank screens in Android WebView & offline environments) */
+      (function() {
+        var memStorage = {};
+        try {
+          var test = '__kmf_test__';
+          window.localStorage.setItem(test, test);
+          window.localStorage.removeItem(test);
+        } catch (e) {
+          try {
+            Object.defineProperty(window, 'localStorage', {
+              value: {
+                getItem: function(k) { return memStorage[k] !== undefined ? memStorage[k] : null; },
+                setItem: function(k, v) { memStorage[k] = String(v); },
+                removeItem: function(k) { delete memStorage[k]; },
+                clear: function() { memStorage = {}; },
+                key: function(i) { return Object.keys(memStorage)[i] || null; },
+                get length() { return Object.keys(memStorage).length; }
+              },
+              writable: true,
+              configurable: true
+            });
+          } catch (e2) {}
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-emerald-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

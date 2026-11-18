@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-urdu: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', system-ui, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #f0fdf4;
+    background-image: 
+      radial-gradient(#059669 0.75px, transparent 0.75px),
+      radial-gradient(#10b981 0.75px, #f0fdf4 0.75px);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background-color: #022c22;
+    background-image: 
+      radial-gradient(#10b981 0.75px, transparent 0.75px),
+      radial-gradient(#059669 0.75px, #022c22 0.75px);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+    background-attachment: fixed;
+  }
+
+  [dir="rtl"] {
+    font-family: var(--font-urdu);
+    letter-spacing: 0;
+  }
+}
+
+/* Islamic Geometric Arch & Pattern utilities */
+.islamic-pattern {
+  background-color: #064e3b;
+  background-image: 
+    linear-gradient(30deg, #047857 12%, transparent 12.5%, transparent 87%, #047857 87.5%, #047857),
+    linear-gradient(150deg, #047857 12%, transparent 12.5%, transparent 87%, #047857 87.5%, #047857),
+    linear-gradient(30deg, #047857 12%, transparent 12.5%, transparent 87%, #047857 87.5%, #047857),
+    linear-gradient(150deg, #047857 12%, transparent 12.5%, transparent 87%, #047857 87.5%, #047857),
+    linear-gradient(60deg, #065f46 25%, transparent 25.5%, transparent 75%, #065f46 75%, #065f46),
+    linear-gradient(60deg, #065f46 25%, transparent 25.5%, transparent 75%, #065f46 75%, #065f46);
+  background-size: 40px 70px;
+  background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+}
+
+.font-urdu {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', system-ui, sans-serif;
+  line-height: 1.8;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .no-print, aside, header, nav, button:not(.print-include) {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+
+  /* Full A4 page expansion for printable reports */
+  #app-main-view,
+  #app-main-view > div,
+  #app-main-view main,
+  #printable-report {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: white !important;
+    color: #0f172a !important;
+  }
+  #printable-report {
+    padding: 8px !important;
+    border: none !important;
+  }
+
+  /* CRITICAL: When printing from Receipt Modal, completely hide the main app view (all members, all tables, contributions lists) */
+  body.receipt-modal-active #app-main-view,
+  body.printing-receipt #app-main-view,
+  body:has(#printable-receipt) #app-main-view,
+  body.receipt-modal-active main,
+  body.printing-receipt main,
+  body:has(#printable-receipt) main,
+  body.receipt-modal-active aside,
+  body.printing-receipt aside,
+  body:has(#printable-receipt) aside {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -99999px !important;
+    top: -99999px !important;
+  }
+
+  /* Ensure the Receipt Modal and #printable-receipt display as the single isolated page */
+  #receipt-modal-backdrop,
+  .fixed.inset-0:has(#printable-receipt),
+  body.receipt-modal-active .fixed.inset-0,
+  body.printing-receipt .fixed.inset-0 {
+    position: static !important;
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  #receipt-modal-dialog,
+  body.receipt-modal-active .max-w-2xl,
+  body.printing-receipt .max-w-2xl {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    background: transparent !important;
+  }
+
+  #receipt-modal-body-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+  }
+
+  /* Strict single-page receipt enforcement with clear bold borders */
+  #printable-receipt {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 270mm !important;
+    background: white !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+    padding: 14px !important;
+    margin: 0 auto !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+    overflow: hidden !important;
+  }
+  #printable-receipt table {
+    width: 100% !important;
+  }
+  #printable-receipt td, #printable-receipt th {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+
+  /* Qawaid wo Zawabit multi-page print without clipping or breaking rules */
+  .rule-print-card {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    break-inside: avoid-page !important;
+    display: block !important;
+    margin-bottom: 14px !important;
+    background: white !important;
+    color: #0f172a !important;
+    border: 1.5px solid #cbd5e1 !important;
+  }
+  #printable-rules {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+

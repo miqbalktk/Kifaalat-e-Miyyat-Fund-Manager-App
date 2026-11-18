@@ -1,0 +1,8 @@
+{
+  "name": "Kifaalat e Miyyat Fund",
+  "description": "Community Bereavement & Mutual Funeral Assistance Charity Fund with monthly contribution tracking, automated notifications, transparent reports, secure donations, and Urdu localization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

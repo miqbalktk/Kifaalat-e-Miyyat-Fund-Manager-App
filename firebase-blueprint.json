@@ -1,0 +1,141 @@
+{
+  "entities": {
+    "Member": {
+      "title": "Member",
+      "description": "Kifaalat e Miyyat Fund enrolled member record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique member identifier" },
+        "membershipNumber": { "type": "string", "description": "Official membership number like KMF-001" },
+        "fullName": { "type": "string", "description": "Member full name in English" },
+        "fullNameUrdu": { "type": "string", "description": "Member full name in Urdu" },
+        "fatherName": { "type": "string", "description": "Father or guardian name" },
+        "phone": { "type": "string", "description": "Contact phone number" },
+        "whatsapp": { "type": "string", "description": "WhatsApp contact number" },
+        "address": { "type": "string", "description": "Residential address or village" },
+        "cnic": { "type": "string", "description": "CNIC identity number" },
+        "monthlyFee": { "type": "number", "description": "Monthly contribution fee in PKR" },
+        "status": { "type": "string", "description": "Membership status: active, pending, suspended" },
+        "joinedDate": { "type": "string", "description": "Date of enrollment" },
+        "emergencyNominee": { "type": "string", "description": "Primary nominee for bereavement grant" },
+        "emergencyNomineeRelation": { "type": "string", "description": "Nominee relationship" },
+        "emergencyNomineePhone": { "type": "string", "description": "Nominee contact phone" }
+      },
+      "required": ["id", "fullName", "phone", "status"]
+    },
+    "Contribution": {
+      "title": "Contribution",
+      "description": "Monthly contribution (chanda) payment record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique transaction id" },
+        "memberId": { "type": "string", "description": "Reference to member ID" },
+        "memberName": { "type": "string", "description": "Member name at time of payment" },
+        "month": { "type": "string", "description": "Month string e.g. October 2026" },
+        "amount": { "type": "number", "description": "Contribution amount in PKR" },
+        "paidDate": { "type": "string", "description": "Payment date YYYY-MM-DD" },
+        "method": { "type": "string", "description": "Payment channel: easypaisa, jazzcash, bank_transfer, cash_in_hand" },
+        "referenceNo": { "type": "string", "description": "Transaction ID or receipt reference" },
+        "receiptNumber": { "type": "string", "description": "Official receipt number e.g. REC-2026-001" },
+        "status": { "type": "string", "description": "Payment status: verified, pending" },
+        "collectedBy": { "type": "string", "description": "Official receiver / Khazanchi name" },
+        "monthsCount": { "type": "number", "description": "Number of advance months paid" },
+        "notes": { "type": "string", "description": "Additional notes" }
+      },
+      "required": ["id", "memberId", "amount", "paidDate", "method"]
+    },
+    "Donation": {
+      "title": "Donation",
+      "description": "Charity, sadqa, or zakat contribution record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique donation id" },
+        "donorName": { "type": "string", "description": "Donor name or Anonymous" },
+        "donorPhone": { "type": "string", "description": "Donor contact phone" },
+        "donorEmail": { "type": "string", "description": "Donor email address" },
+        "amount": { "type": "number", "description": "Donation amount in PKR" },
+        "category": { "type": "string", "description": "Category: sadqah, zakat, general_charity" },
+        "paymentMethod": { "type": "string", "description": "Payment channel" },
+        "date": { "type": "string", "description": "Donation date YYYY-MM-DD" },
+        "receiptNumber": { "type": "string", "description": "Official receipt number" },
+        "dedicatedFor": { "type": "string", "description": "Dedicated intention or Isaal-e-Sawab" },
+        "isAnonymous": { "type": "boolean", "description": "Whether donor requested anonymity" }
+      },
+      "required": ["id", "amount", "category", "date"]
+    },
+    "BereavementClaim": {
+      "title": "BereavementClaim",
+      "description": "Bereavement solace and funeral grant claim record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique claim id" },
+        "claimNumber": { "type": "string", "description": "Claim reference number" },
+        "memberId": { "type": "string", "description": "Member id" },
+        "memberName": { "type": "string", "description": "Member name" },
+        "deceasedName": { "type": "string", "description": "Name of deceased family member" },
+        "deceasedRelation": { "type": "string", "description": "Relationship to member" },
+        "requestedAmount": { "type": "number", "description": "Amount requested in PKR" },
+        "approvedAmount": { "type": "number", "description": "Amount approved in PKR" },
+        "status": { "type": "string", "description": "Claim status: pending, approved, disbursed, rejected" },
+        "filedDate": { "type": "string", "description": "Date claim filed" },
+        "disbursedDate": { "type": "string", "description": "Date aid disbursed" },
+        "recipientName": { "type": "string", "description": "Recipient nominee name" }
+      },
+      "required": ["id", "memberId", "deceasedName", "status", "filedDate"]
+    },
+    "MemberCredential": {
+      "title": "MemberCredential",
+      "description": "System access login credential",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string", "description": "Unique login username" },
+        "password": { "type": "string", "description": "Plain/hashed login password" },
+        "role": { "type": "string", "description": "Role: super_admin, finance_secretary, member, guest" },
+        "memberId": { "type": "string", "description": "Linked member id" },
+        "fullName": { "type": "string", "description": "User full name" },
+        "fullNameUrdu": { "type": "string", "description": "User Urdu full name" },
+        "phone": { "type": "string", "description": "User phone" },
+        "disabled": { "type": "boolean", "description": "Account disabled flag" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      },
+      "required": ["username", "password", "role"]
+    },
+    "AppSetting": {
+      "title": "AppSetting",
+      "description": "Global application configuration and metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Setting key identifier" },
+        "value": { "type": "string", "description": "Setting value JSON" },
+        "updatedAt": { "type": "string", "description": "Last updated timestamp" }
+      },
+      "required": ["id"]
+    }
+  },
+  "firestore": {
+    "/members/{memberId}": {
+      "schema": { "$ref": "#/entities/Member" },
+      "description": "All enrolled members of Kifaalat e Miyyat Fund"
+    },
+    "/contributions/{contributionId}": {
+      "schema": { "$ref": "#/entities/Contribution" },
+      "description": "All monthly fee contribution receipts"
+    },
+    "/donations/{donationId}": {
+      "schema": { "$ref": "#/entities/Donation" },
+      "description": "All charity, sadqa and zakat donations"
+    },
+    "/claims/{claimId}": {
+      "schema": { "$ref": "#/entities/BereavementClaim" },
+      "description": "Bereavement assistance aid claims and disbursements"
+    },
+    "/credentials/{credentialId}": {
+      "schema": { "$ref": "#/entities/MemberCredential" },
+      "description": "Admin and member login credentials"
+    },
+    "/appSettings/{settingId}": {
+      "schema": { "$ref": "#/entities/AppSetting" },
+      "description": "System configuration and sync metadata"
+    }
+  }
+}
